@@ -24,8 +24,8 @@ class HappyHour(models.Model):
 	city = models.CharField(max_length=200)
 
 	def __str__(self):
-		return "{} from {} to {} on {}".format(self.name, self.start_time, self.end_time,
-											   ''.join(self.avail_days())
+		return "a happy hour at {} from {} to {} on: {}".format(self.name, self.start_time, self.end_time,
+											   ', '.join(self.avail_days())
 											   )
 
 	def avail_days(self):
