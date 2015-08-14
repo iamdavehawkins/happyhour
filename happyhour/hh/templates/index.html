@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Happy Hour | Welcome</title>
+	</head>
+	<body>
+        {% if user.is_authenticated %}
+		<h1>Welcome {{user.username}}</h1>
+        {% else %}
+        <h1>Welcome!</h1>
+        {% endif %}
+
+        <a href='/hh/login/'>Login</a>
+	</body>
+</html>
