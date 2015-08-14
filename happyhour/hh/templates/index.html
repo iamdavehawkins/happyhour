@@ -6,10 +6,13 @@
 	<body>
         {% if user.is_authenticated %}
 		<h1>Welcome {{user.username}}</h1>
+        <a href='/hh/logout/'>Logout</a>
         {% else %}
         <h1>Welcome!</h1>
+        <a href='hh/register/'>Register Here!</a>
+        <a href='/hh/login/'>Login</a>
         {% endif %}
 
-        <a href='/hh/login/'>Login</a>
+        
 	</body>
 </html>
