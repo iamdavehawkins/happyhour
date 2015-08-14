@@ -8,6 +8,7 @@ for h in range(0, 23):
 		TIME_CHOICES.append((time_opt, time_opt.strftime('%-I:%M %p')))
 
 class HappyHour(models.Model):
+	# TODO: add User ForeignKey field and migrate db (also update forms.py and views.py)
 	name = models.CharField(max_length=200)
 	notes = models.CharField(max_length=200)
 	start_time = models.TimeField('start time', choices=TIME_CHOICES)

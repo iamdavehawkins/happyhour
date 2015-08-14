@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from forms import UserForm
+from forms import UserForm, HappyHourForm
 
 # Create your views here.
 def register(request):
@@ -62,6 +62,25 @@ def user_logout(request):
 def index(request):
 	context = RequestContext(request)
 	return render_to_response('index.html', {}, context)
+
+@login_required
+def add_hh(request):
+	context = RequestContext(request)
+
+	if request.method == 'POST':
+		# TODO: pass the user object in here
+		form = HappyHourForm(request.POST)
+
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			# TODO: show this in the template
+			print(form.errors)
+	else:
+		form = HappyHourForm()
+
+	return render_to_response('add_hh.html', {'form':form}, context)
 
 def bar(request, rest_name):
 	return HttpResponse("This is the details for one bar/restaurant happy hour: {}".format(rest_name))

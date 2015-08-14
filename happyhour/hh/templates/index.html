@@ -5,7 +5,8 @@
 	</head>
 	<body>
         {% if user.is_authenticated %}
-		<h1>Welcome {{user.username}}</h1>
+        <h1>Welcome {{user.username}}</h1>
+        <a href='/hh/add_hh/'>Add a Happy Hour</a>
         <a href='/hh/logout/'>Logout</a>
         {% else %}
         <h1>Welcome!</h1>
