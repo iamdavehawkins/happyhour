@@ -1,6 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 import datetime as dt
 
+# TODO: change times from 10am to 4am
 TIME_CHOICES = []
 for h in range(0, 23):
 	for m in [0, 30]:
@@ -9,6 +12,7 @@ for h in range(0, 23):
 
 class HappyHour(models.Model):
 	# TODO: add User ForeignKey field and migrate db (also update forms.py and views.py)
+	user = models.ForeignKey(User, null=True, blank=True)
 	name = models.CharField(max_length=200)
 	notes = models.CharField(max_length=200)
 	start_time = models.TimeField('start time', choices=TIME_CHOICES)
