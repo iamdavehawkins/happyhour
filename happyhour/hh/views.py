@@ -72,7 +72,9 @@ def add_hh(request):
 		form = HappyHourForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=True)
+			new_hh = form.save(commit=False)
+			new_hh.user = request.user
+			new_hh.save()
 			return index(request)
 		else:
 			# TODO: show this in the template

@@ -11,7 +11,6 @@ class UserForm(forms.ModelForm):
 		fields = ('username', 'email', 'password')
 
 class HappyHourForm(forms.ModelForm):
-	# TODO: add the user information in an __init__
 	name = forms.CharField(max_length=200, 
 						   widget=forms.TextInput(attrs={'placeholder':"Bar / Restaurant Name"})
 						   )
@@ -37,3 +36,4 @@ class HappyHourForm(forms.ModelForm):
 		fields = ('name', 'notes', 'start_time', 'end_time',
 			'monday', 'tuesday', 'wednesday', 'thursday',
 			'friday', 'saturday', 'sunday', 'food', 'drink', 'city')
+		exclude = ['user']
