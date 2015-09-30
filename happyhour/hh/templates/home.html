@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Happy Hour | Home</title>
+	</head>
+	<body>
+        <h1>Welcome {{user.username}}</h1>
+        <a href='/hh/add_hh/'>Add a Happy Hour</a>
+        <a href='/hh/logout/'>Logout</a>
+
+        <h4>Current Happy Hours:</h4>
+        
+        <table>
+                <tr>
+                        <th>Bar</th>
+                        <th>Details</th>
+                        <th>Start</th>
+                        <th>End</th>
+                </tr>
+                {% for hh in hhs %}
+                <tr>
+                        <th>{{hh.name}}</th>
+                        <th>{{hh.notes}}</th>
+                        <th>{{hh.start_time}}</th>
+                        <th>{{hh.end_time}}</th>
+                </tr>
+                {% endfor %}
+        </table>
+        
+	</body>
+</html>

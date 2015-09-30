@@ -4,8 +4,11 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from forms import UserForm, HappyHourForm
+from models import HappyHour
+from utils import get_day_of_week
 
 # Create your views here.
 def register(request):
@@ -44,9 +47,9 @@ def user_login(request):
 		if user:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect('/hh/')
+				return HttpResponseRedirect('/hh/home')
 			else:
-				return HttpResponse("Your Rango account is disabled.")
+				return HttpResponse("Your account is disabled.")
 		else:
 			return HttpResponse('Sorry! These credentials are incomplete or not valid.')
 
@@ -62,6 +65,23 @@ def user_logout(request):
 def index(request):
 	context = RequestContext(request)
 	return render_to_response('index.html', {}, context)
+
+@login_required
+def home(request):
+	context = RequestContext(request)
+
+	curr_hhs = HappyHour.objects.filter(start_time__lte=timezone.localtime(timezone.now()),
+										end_time__gte=timezone.localtime(timezone.now()),
+										user=request.user
+										)
+	day_of_week = get_day_of_week(timezone.now())
+	
+	now_hhs = []
+
+	for hh in curr_hhs:
+		now_hhs.append(hh)
+
+	return render_to_response('home.html', {'hhs':now_hhs}, context)
 
 @login_required
 def add_hh(request):

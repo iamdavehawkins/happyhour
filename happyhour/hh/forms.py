@@ -11,15 +11,25 @@ class UserForm(forms.ModelForm):
 		fields = ('username', 'email', 'password')
 
 class HappyHourForm(forms.ModelForm):
+	'''
+	Primary form to add a new happy hour
+
+	TODO: Consider which fields are req'd and which aren't
+		  Also some custom validators should be added
+			- at least one day must be checked
+			- at least one (drinks or food must be checked)
+	'''
 	name = forms.CharField(max_length=200, 
 						   widget=forms.TextInput(attrs={'placeholder':"Bar / Restaurant Name"})
 						   )
 	notes = forms.CharField(max_length=200,
-							widget=forms.Textarea(attrs={'placeholder': 'Enter details for this happy hour \
+							widget=forms.Textarea(attrs={'placeholder':'Enter details for this happy hour \
 									   					 (e.g. $2 Pints, Half off appetizers)'})
 							)
 	start_time = forms.ChoiceField(choices=TIME_CHOICES)
 	end_time = forms.ChoiceField(choices=TIME_CHOICES)
+	# Boolean fields are a little weird in Django, they initialize to null?
+	# 	and if required=True, they MUST be checked by the user or the form is invalid
 	monday = forms.BooleanField(required=False, initial=False)
 	tuesday = forms.BooleanField(required=False, initial=False)
 	wednesday = forms.BooleanField(required=False, initial=False)

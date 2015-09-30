@@ -11,6 +11,7 @@
 
             {% csrf_token %}
             {{ form }}
+            <!-- TODO: add a nice way to display errors in the fields -->
 
           <!--   {% for field in form.visible_fields %}
                 {{ field.errors }}

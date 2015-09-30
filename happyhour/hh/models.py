@@ -11,7 +11,9 @@ for h in range(0, 23):
 		TIME_CHOICES.append((time_opt, time_opt.strftime('%-I:%M %p')))
 
 class HappyHour(models.Model):
-	# TODO: add User ForeignKey field and migrate db (also update forms.py and views.py)
+	'''
+	The primary model here to house details for a happy hour
+	'''
 	user = models.ForeignKey(User, null=True, blank=True)
 	name = models.CharField(max_length=200)
 	notes = models.CharField(max_length=200)
@@ -34,8 +36,8 @@ class HappyHour(models.Model):
 											   )
 
 	def avail_days(self):
-		self.days = [self.monday, self.tuesday, self.wednesday, self.thursday,
-				     self.friday, self.saturday, self.sunday]
+		''' return a human-enjoyable iterable of the available days '''
+		# TODO: There's probably a cleaner way to return an iterable of days
 
 		self.avail_days = []
 		if self.monday:

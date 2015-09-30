@@ -1,5 +1,8 @@
+import datetime
+
 from django.test import TestCase
 from hh.models import HappyHour
+from hh.utils import get_day_of_week
 
 h = HappyHour(name="Ashley's",notes='free beer',
 	start_time='12:30 AM',
@@ -32,3 +35,7 @@ class HappyHourTestCase(TestCase):
 		h = self.create_happy_hour()
 		self.assertTrue(isinstance(h, HappyHour))
 		self.assertEqual(h.avail_days(), ['M', 'Tu', 'W', 'Sa', 'Su'])
+
+	def test_get_day_of_week(self):
+		# TODO: how do you write a test when the result varies by time?
+		self.assertEqual(get_day_of_week(datetime.datetime(2015, 9, 29, 20, 50, 12)), 'Tu')
